@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN BOX -->
+<div class="container" id="loginBox">
+    <h2>Sign In</h2>
+
+    <label>User ID</label>
+    <input type="text" placeholder="Enter ID">
+
+    <label>Password</label>
+    <input type="password" placeholder="Enter Password">
+
+    <label>Captcha</label>
+    <div class="captcha-box">
+        <span id="captcha"></span>
+        <button type="button" onclick="generateCaptcha()">↻</button>
+    </div>
+
+    <input type="text" id="userCaptcha" placeholder="Enter Captcha">
+
+    <button type="button" onclick="validateForm()">Sign In</button>
+
+    <div class="links">
+        <a href="#" onclick="openForgotPassword()">Forgot Password?</a>
+        <a href="#" onclick="openForgotId()">Forgot ID?</a>
+    </div>
+</div>
+
+<!-- SIGNUP BOX (Hidden initially) -->
+<div class="container hidden" id="signupBox">
+    <h2>Sign Up</h2>
+
+    <label>Name</label>
+    <input type="text" placeholder="Enter Name">
+
+    <label>Email</label>
+    <input type="email" placeholder="Enter Email">
+
+    <label>Password</label>
+    <input type="password" placeholder="Create Password">
+
+    <button type="button" onclick="createAccount()">Create Account</button>
+
+    <p class="back" onclick="backToLogin()">← Back to Login</p>
+</div>
+
+<!-- Signup Button below login -->
+<div class="signup-box" id="signupBtnBox">
+    <p>Don’t have an account?</p>
+    <button type="button" onclick="openSignup()">Sign Up</button>
+</div>
+
+<!-- FORGOT PASSWORD BOX -->
+<div class="container hidden" id="forgotPasswordBox">
+    <h2>Forgot Password</h2>
+
+    <label>Registered Email / Mobile</label>
+    <input type="text" placeholder="Enter Email or Mobile">
+
+    <button type="button">Send OTP</button>
+
+    <p class="back" onclick="backToLogin()">← Back to Login</p>
+</div>
+
+<!-- FORGOT ID BOX -->
+<div class="container hidden" id="forgotIdBox">
+    <h2>Forgot ID</h2>
+
+    <label>Registered Email</label>
+    <input type="email" placeholder="Enter Email">
+
+    <button type="button">Get ID</button>
+
+    <p class="back" onclick="backToLogin()">← Back to Login</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

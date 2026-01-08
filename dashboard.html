@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <h1>Dashboard</h1>
+    <nav>
+        <a href="#">About</a>
+        <a href="#">product</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee-container">
+    <p>Welcome! Check our latest products, offers and exclusive deals!</p>
+</div>
+<div class="slider-container">
+    <div class="slider">
+        <img src="hanuman.jpg" class="slide" alt="Banner 1">
+        <img src="hanumanji.jpg" class="slide" alt="Banner 2">
+        <img src="pictures.jpg" class="slide" alt="Banner 3">
+    </div>
+</div>
+<!-- MAIN CONTENT -->
+<div class="content">
+    <h2>Products</h2>
+    <div class="product-grid" id="productGrid">
+        <!-- Product cards will be generated via JS -->
+    </div>
+</div>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal" id="productModal">
+    <div class="modal-content">
+        <h3 id="modalProductName"></h3>
+        <p>Price: ₹<span id="modalProductPrice"></span></p>
+        <input type="number" id="modalQty" value="1" min="1">
+        <button onclick="openAddressForm()">Buy</button>
+        <button class="close-btn" onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+<!-- ADDRESS FORM POPUP -->
+<div class="popup" id="addressPopup">
+    <div class="popup-content">
+        <h3>Enter Delivery Details</h3>
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="text" id="address" placeholder="Address">
+      <input type="text" id="address" placeholder="house namber">
+      <input type="text" id="address"maxlength="6" placeholder="pincode">
+     <input type="text" id="address" placeholder="city">
+   <input type="text" id="address" placeholder="city">
+    <input type="text" id="address" placeholder="city">
+     <input type="text" id="address" placeholder="city">
+	 <input type="text" id="address" placeholder="state">
+	  <input type="text" id="phone"maxlength="10" placeholder="Phone Number">
+        <p id="billText"></p>
+        <button onclick="submitOrder()">Submit Order</button>
+        <button onclick="closeAddressPopup()" style="background:red; margin-top:5px;">Cancel</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // Product List
+    const products = [
+        {name:"gehu", price:100, img:"hanuman.jpg"},
+        {name:"Product B", price:250, img:"hanuman.jpg"},
+        {name:"Product C", price:500, img:"hanuman.jpg"},
+        {name:"Product D", price:750, img:"hanuman.jpg"},
+        {name:"Product E", price:1200, img:"hanuman.jpg"},
+        {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+	    {name:"Product E", price:1200, img:"hanuman.jpg"},
+		{name:"Product E", price:1200, img:"hanuman.jpg"},
+	
+	];
+
+    const productGrid = document.getElementById("productGrid");
+
+    // Generate product cards
+    products.forEach((product, index) => {
+        let card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+            <img src="${product.img}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>Price: ₹${product.price}</p>
+        `;
+        card.addEventListener("click", () => openProductModal(product));
+        productGrid.appendChild(card);
+    });
+
+    // Modal logic
+    let selectedProduct = {};
+    function openProductModal(product) {
+        selectedProduct = product;
+        document.getElementById("modalProductName").innerText = product.name;
+        document.getElementById("modalProductPrice").innerText = product.price;
+        document.getElementById("modalQty").value = 1;
+        document.getElementById("productModal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("productModal").style.display = "none";
+    }
+
+    // Address form logic
+    function openAddressForm() {
+        let qty = parseInt(document.getElementById("modalQty").value);
+        document.getElementById("billText").innerText = `Total Bill: ₹${selectedProduct.price * qty}`;
+        closeModal();
+        document.getElementById("addressPopup").style.display = "flex";
+    }
+
+    function closeAddressPopup() {
+        document.getElementById("addressPopup").style.display = "none";
+    }
+
+    function submitOrder() {
+        let name = document.getElementById("name").value;
+        let address = document.getElementById("address").value;
+        let phone = document.getElementById("phone").value;
+        let qty = parseInt(document.getElementById("modalQty").value);
+
+        if(!name || !address || !phone) {
+            alert("Please fill all details!");
+            return;
+        }
+
+        alert(`Order Placed!\n\nProduct: ${selectedProduct.name}\nQuantity: ${qty}\nTotal Bill: ₹${selectedProduct.price * qty}\nName: ${name}\nAddress: ${address}\nPhone: ${phone}`);
+        closeAddressPopup();
+    }
+</script>
+
+</body>
+</html>
